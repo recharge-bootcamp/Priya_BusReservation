@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="template.xhtml">
+<ui:define name="body">
+   <h:form id="frmSearch">
+
+        <p:panel  style="text-align:left;" id="pnlSearch" header="Search">
+         <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+         
+           <p:panelGrid style="border:0;">
+           <p:row>
+           <p:column>Origin</p:column>
+           <p:column>
+                 <p:selectOneMenu value="#{helloBean.cityOrigID}" id="city1">
+            <f:selectItems value="#{helloBean.getCities()}" var="city" 
+                itemLabel="#{city.cityName}" itemValue="#{city.cityID}" />
+        </p:selectOneMenu>
+        </p:column>
+        <p:column>Destination</p:column>
+         <p:column>
+                 <p:selectOneMenu value="#{helloBean.cityDestID}" id="city2" >
+            <f:selectItems value="#{helloBean.getCities()}" var="city" 
+                itemLabel="#{city.cityName}" itemValue="#{city.cityID}" />
+        </p:selectOneMenu>
+        </p:column>
+         <p:column>Onward Date</p:column>
+        <p:column><p:calendar value="#{helloBean.onwardDate}" pattern="dd/MM/yyyy" mindate="#{helloBean.today}" 
+>
+        </p:calendar></p:column>
+        <p:column>Seats</p:column>
+        <p:column><h:inputText value="#{helloBean.noOfSeats}" 
+ converterMessage="Please enter only digits"></h:inputText></p:column>
+        
+        <p:column><p:commandButton value="Go"  action="#{helloBean.loadDetails}" update=":frmSearch">
+        <f:setPropertyActionListener value="1" target="#{helloBean.homeID}"></f:setPropertyActionListener>
+        
+        </p:commandButton></p:column>
+        </p:row>
+           </p:panelGrid>
+           
+            </p:panel>
+             
+             	
+             
+       </h:form>     
+  
+
+ </ui:define>
+
+</ui:composition>

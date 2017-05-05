@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="template.xhtml">
+<ui:define name="body">
+   <h:form id="frmPas">
+
+      
+             <p:panel widgetVar="pnlPas" header="Passenger Details" style="width:60%;text-align:left;" id="pnlPass">
+              
+
+              <p:fieldset legend="Primary Details" style="margin-bottom:20px" id="fieldPri">
+             <p:panelGrid id="pnlGrdPriPas">
+            
+             	<p:row>
+             <p:column><p:selectOneMenu value="#{helloBean.person.pTitle}">
+            <f:selectItem   itemLabel="Ms" itemValue="Ms" />
+            <f:selectItem   itemLabel="Mrs" itemValue="Mrs" />
+            <f:selectItem   itemLabel="Mr" itemValue="Mr" />
+            
+        </p:selectOneMenu></p:column>
+             <p:column><p:inputText value="#{helloBean.person.pName}" required="true" id="primName" requiredMessage="Please enter Primary Passenger Name"></p:inputText>
+             &nbsp;<h:message for="primName" style="color:red"></h:message> </p:column>
+             	
+             	</p:row>
+             	<p:row>
+             <p:column>Age</p:column>
+             <p:column><p:inputText value="#{helloBean.person.pAge}" required="true" converterMessage="Please enter digits only." id="pmID" requiredMessage="Please enter Age"></p:inputText>&nbsp;
+              <h:message for="pmID" style="color:red"></h:message></p:column>
+             	
+             	</p:row>
+             	</p:panelGrid>
+             	</p:fieldset>
+             	 <p:fieldset legend="Co-Passenger Details" style="margin-bottom:20px" id="fieldCo">
+             	<p:panelGrid id="pnlGrdCoPas">
+             	
+             	<p:row>
+             <p:column><p:selectOneMenu >
+            <f:selectItem   itemLabel="Ms" itemValue="1" />
+            <f:selectItem   itemLabel="Mrs" itemValue="2" />
+            <f:selectItem   itemLabel="Mr" itemValue="3" />
+            
+        </p:selectOneMenu></p:column>
+             <p:column><h:inputText ></h:inputText></p:column>
+             	
+             	</p:row>
+             	<p:row>
+             <p:column>Age</p:column>
+             <p:column><p:inputText ></p:inputText></p:column>
+             	
+             	</p:row>
+             	</p:panelGrid>
+             	</p:fieldset>
+             	 <p:fieldset legend="Contact Details" style="margin-bottom:20px" id="fieldCon">
+             	<p:panelGrid id="pnlGrdContact">
+             	<p:row>
+             <p:column>Mobile</p:column>
+             <p:column><p:inputText value="#{helloBean.pnrDet.tPhone}" required="true" maxlength="10" id="phone" requiredMessage="Please enter Phone number"
+             >
+             
+             </p:inputText>
+              &nbsp;<h:message for="phone" style="color:red"></h:message></p:column>
+             	
+             	</p:row>
+             	<p:row>
+             <p:column>Email ID</p:column>
+             <p:column><p:inputText value="#{helloBean.pnrDet.tEmail}" id="email" required="true" validatorMessage="Email field is empty  or in wrong format" requiredMessage="Please enter email">
+              <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+				</p:inputText>
+				 &nbsp;<h:message for="email" style="color:red"></h:message></p:column>
+             	
+             	</p:row>
+             	
+             	<p:row><p:column colspan="2">&nbsp;</p:column></p:row>
+             	
+             	<p:row>
+             <p:column><p:commandButton value="Confirm" action="#{helloBean.savePnr}" id="cmd"  update=":frmPas" >
+            
+
+             </p:commandButton> </p:column>
+             <p:column><p:commandButton value="Cancel"></p:commandButton></p:column>
+             	
+             	</p:row>
+             
+             </p:panelGrid>
+             	
+             	</p:fieldset>
+             	
+             </p:panel>
+       </h:form>    
+      
+   
+ </ui:define>
+
+</ui:composition>

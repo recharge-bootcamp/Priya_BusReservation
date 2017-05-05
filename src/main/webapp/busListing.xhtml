@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="template.xhtml">
+<ui:define name="body">
+   <h:form id="frmList">
+
+        <p:panel  style="text-align:left;width:100%" id="pnlSort" header="Bus Lists">
+        
+         <p:panelGrid >
+             <p:row>
+             <p:column>FILTER:</p:column>
+             <p:column>
+             <p:selectOneMenu id="console" value="#{helloBean.busTypeID}">
+             <f:selectItem itemLabel="Select Bus Type" itemValue="-1"></f:selectItem>
+            <f:selectItems value="#{helloBean.getBTypes()}" var="type" 
+                itemLabel="#{type.busTypeName}" itemValue="#{type.busTypeID}" ></f:selectItems>
+                <p:ajax event="change" listener="#{helloBean.sortType(2)}" update=":frmList:dtblBus"  >
+                </p:ajax>
+        </p:selectOneMenu>
+        </p:column>
+             	</p:row>
+             </p:panelGrid>
+
+          </p:panel>
+           
+           <p:panel  style="text-align:center;" id="pnlBus">
+           
+           <p:dataTable var="bus" value="#{helloBean.getBuses()}" id="dtblBus" lazy="true">
+           
+           
+            
+        <p:column headerText="Travels">
+            <h:outputText value="#{bus.busName}" />
+        </p:column>
+        <p:column headerText="Depart">
+        <p:calendar value="#{bus.destTime}" pattern="HH:mm"></p:calendar>
+           
+        </p:column>
+        <p:column headerText="Arrival" >
+        <p:calendar value="#{bus.arrivalTime}" pattern="HH:mm"></p:calendar>
+         
+        </p:column>
+        <p:column headerText="Price" sortBy="#{bus.fare}">
+            <h:outputText value="#{bus.fare}" />
+        </p:column>
+        <p:column headerText="Seats"> <h:outputText value="#{bus.availSeats}" /></p:column>
+        <p:column style="text-align: center">
+             <p:commandButton   value="Book" action="#{helloBean.loadPassenger}" rendered="#{bus.availSeats > 0}">
+                <f:setPropertyActionListener value="#{bus}" target="#{helloBean.busDet}"></f:setPropertyActionListener>
+                
+            </p:commandButton>
+        </p:column>
+           
+           </p:dataTable>
+          
+           
+            </p:panel>
+      </h:form>  
+      <script>
+      function setHiddenVal(val){
+    	  alert("hi");
+    	  document.getElementById('frmList:hidden').value = val;
+      }
+      </script>
+     
+ </ui:define>
+
+</ui:composition>
